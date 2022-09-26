@@ -32,9 +32,8 @@ namespace StringCalculaterTests
             //Act and Assert
             Action act = () => _stringCalculater.Add(numbers);
             //Assert
-            act.Should().Throw<ArgumentException>().WithMessage("negatives not allowed ");
+            act.Should().Throw<ArgumentException>();
         }
-
         [Theory]
         [InlineData("1\n2,3,4", new int[] { 1, 2, 3, 4 })] // default delimiter with new lines between numbers 
         [InlineData("//;\n1;2;3\n4;5;6", new int[] { 1, 2, 3, 4, 5, 6 })] // specifed delemiter with new lines between numbers
