@@ -15,7 +15,7 @@ namespace StringCalculaterTests
         [InlineData("3", 3)] // one number 
         [InlineData("1,5", 6)] // 2 numbers 
         [InlineData("1,2,3,4,5,6", 21)] // unknown amount of numbers 
-        public void emptyString_AddShouldReturnZero(string numbers, int expected)
+        public void addShouldReturnSum(string numbers, int expected)
         {
             //Act
             _result = _stringCalculater.add(numbers);
