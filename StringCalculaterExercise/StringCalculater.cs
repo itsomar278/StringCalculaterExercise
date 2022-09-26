@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace StringCalculaterExercise
+﻿namespace StringCalculaterExercise
 {
     public class StringCalculater
     {
@@ -9,18 +6,18 @@ namespace StringCalculaterExercise
         {
 
         }
-        public int add(string numbers )
+        public int Add(string numbers)
         {
-            if(string.IsNullOrEmpty(numbers))
+            if (string.IsNullOrEmpty(numbers))
             {
                 return 0;
             }
             else
             {
-                if(numbers.Contains(","))
+                if (numbers.Contains(',') || numbers.Contains('\n'))
                 {
-                    int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(','), int.Parse); 
-                    return numbersArray.Sum(); 
+                   
+                    return FormatAndParse(numbers).Sum();
                 }
                 else
                 {
@@ -28,5 +25,25 @@ namespace StringCalculaterExercise
                 }
             }
         }
+
+        public int[] FormatAndParse(string numbers)
+        {
+            char delimiter;
+            if (numbers.Contains("//"))
+            {
+                delimiter = (char) numbers[2];
+                numbers = numbers.Remove(0, 4);
+            }
+            else
+            {
+                delimiter = ',';
+            }
+           
+            numbers = numbers.Replace('\n', delimiter);
+            int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(delimiter), int.Parse);
+            return numbersArray; 
+
+        }
+
     }
 }
