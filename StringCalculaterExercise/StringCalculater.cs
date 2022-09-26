@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 namespace StringCalculaterExercise
 {
     public class StringCalculater
@@ -17,14 +19,8 @@ namespace StringCalculaterExercise
             {
                 if(numbers.Contains(","))
                 {
-                    numbers.Trim();
-                    string[] numbersArray = numbers.Split(',');
-                    int sum = 0; 
-                    foreach (var item in numbersArray)
-                    {
-                        sum += int.Parse(item); 
-                    }
-                    return sum;
+                    int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(','), int.Parse); 
+                    return numbersArray.Sum(); 
                 }
                 else
                 {
