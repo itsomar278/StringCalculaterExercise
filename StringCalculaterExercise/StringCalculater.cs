@@ -16,8 +16,12 @@
             {
                 if (numbers.Contains(',') || numbers.Contains('\n'))
                 {
-                   
-                    return FormatAndParse(numbers).Sum();
+                    int[] nums = FormatAndParse(numbers); 
+                    if (nums.Any(n => n < 0))
+                    {
+                        throw new ArgumentException("negatives not allowed ");
+                    }
+                    return nums.Sum();
                 }
                 else
                 {
