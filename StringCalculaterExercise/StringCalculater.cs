@@ -19,6 +19,7 @@ namespace StringCalculaterExercise
             {
                 if(numbers.Contains(","))
                 {
+                    numbers = numbers.Replace('\n', ',');
                     int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(','), int.Parse); 
                     return numbersArray.Sum(); 
                 }
