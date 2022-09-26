@@ -16,7 +16,7 @@
             {
                 if (numbers.Contains(',') || numbers.Contains('\n'))
                 {
-                    int[] nums = FormatAndParse(numbers); 
+                    int[] nums = FormatAndParse(numbers);
                     if (nums.Any(n => n < 0))
                     {
                         throw new ArgumentException("negatives not allowed ");
@@ -35,18 +35,16 @@
             char delimiter;
             if (numbers.Contains("//"))
             {
-                delimiter = (char) numbers[2];
+                delimiter = (char)numbers[2];
                 numbers = numbers.Remove(0, 4);
             }
             else
             {
                 delimiter = ',';
             }
-           
             numbers = numbers.Replace('\n', delimiter);
             int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(delimiter), int.Parse);
-            return numbersArray; 
-
+            return numbersArray;
         }
 
     }
