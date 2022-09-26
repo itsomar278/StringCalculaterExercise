@@ -16,6 +16,8 @@ namespace StringCalculaterTests
         [InlineData("1,5", 6)] // 2 numbers 
         [InlineData("1,2,3,4,5,6", 21)] // unknown amount of numbers 
         [InlineData("1\n2,3", 6)] // new lines between numbers 
+        [InlineData("1, 5 , 1200 ", 6)] // numbers larger than 1000
+        [InlineData(" 1200 ", 0)] // one number larger than 1000
         public void AddShouldReturnSum(string numbers, int expected)
         {
             //Act

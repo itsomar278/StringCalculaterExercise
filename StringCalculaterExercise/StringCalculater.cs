@@ -24,11 +24,18 @@
                             throw new ArgumentException($"negatives not allowed : {num}");
                         }
                     }
-                    return nums.Sum();
+                    return nums.Where(num => num < 1000).Sum();
                 }
                 else
                 {
-                    return int.Parse(numbers);
+                    if (int.Parse(numbers) > 1000)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return int.Parse(numbers);
+                    }
                 }
             }
         }
