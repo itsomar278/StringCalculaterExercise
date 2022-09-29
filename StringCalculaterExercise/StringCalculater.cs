@@ -17,6 +17,8 @@ namespace StringCalculaterExercise
             else
             {
                 int[] nums = FormatAndParse(numbers);
+                CheckNegatives(nums);
+                nums = CheckBigNumbers(nums);
                 return nums.Sum();
             }
         }
@@ -40,14 +42,21 @@ namespace StringCalculaterExercise
             }
             numbers = numbers.Replace("\n", delimiter.ToString());
             int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(delimiter.ToString()), int.Parse);
-            foreach (int num in numbersArray)
+            return numbersArray;
+        }
+        public void CheckNegatives (int[] numbers)
+        {
+            foreach (int num in numbers)
             {
                 if (num < 0)
                 {
                     throw new ArgumentException($"negatives not allowed : {num}");
                 }
             }
-            return numbersArray.Where(x=> x < 1000).ToArray();
+        }
+        public int[] CheckBigNumbers(int[] numbers)
+        {
+           return numbers.Where(x=> x < 1000).ToArray();
         }
 
     }
