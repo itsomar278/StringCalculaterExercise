@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Text;
 
 namespace StringCalculaterExercise
 {
@@ -9,24 +8,56 @@ namespace StringCalculaterExercise
         {
 
         }
-        public int add(string numbers )
+        public int Add(string numbers)
         {
-            if(string.IsNullOrEmpty(numbers))
+            if (numbers.Length == 0)
             {
                 return 0;
             }
             else
             {
-                if(numbers.Contains(","))
+                int[] nums = FormatAndParse(numbers);
+                CheckNegatives(nums);
+                nums = CheckBigNumbers(nums);
+                return nums.Sum();
+            }
+        }
+        public int[] FormatAndParse(string numbers)
+        {
+            StringBuilder delimiter= new StringBuilder();
+            if (numbers.Contains("//"))
+            {
+                int x = numbers.IndexOf("\n");
+                
+                for (int i = 2; i < numbers.IndexOf("\n"); i++)
                 {
-                    int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(','), int.Parse); 
-                    return numbersArray.Sum(); 
+                    char c = numbers[i];
+                    delimiter.Append(c);
                 }
-                else
+               numbers = numbers.Remove(0, numbers.IndexOf("\n")+1);
+            }
+            else
+            {
+                delimiter.Append(",");
+            }
+            numbers = numbers.Replace("\n", delimiter.ToString());
+            int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(delimiter.ToString()), int.Parse);
+            return numbersArray;
+        }
+        public void CheckNegatives (int[] numbers)
+        {
+            foreach (int num in numbers)
+            {
+                if (num < 0)
                 {
-                    return int.Parse(numbers);
+                    throw new ArgumentException($"negatives not allowed : {num}");
                 }
             }
         }
+        public int[] CheckBigNumbers(int[] numbers)
+        {
+           return numbers.Where(x=> x < 1000).ToArray();
+        }
+
     }
 }
