@@ -10,38 +10,16 @@ namespace StringCalculaterExercise
         }
         public int Add(string numbers)
         {
-            if (string.IsNullOrEmpty(numbers))
+            if (numbers.Length == 0)
             {
                 return 0;
             }
             else
             {
-                if (numbers.Contains(',') || numbers.Contains('\n'))
-                {
-                    int[] nums = FormatAndParse(numbers);
-                    foreach (int num in nums)
-                    {
-                        if (num < 0)
-                        {
-                            throw new ArgumentException($"negatives not allowed : {num}");
-                        }
-                    }
-                    return nums.Where(num => num < 1000).Sum();
-                }
-                else
-                {
-                    if (int.Parse(numbers) > 1000)
-                    {
-                        return 0;
-                    }
-                    else
-                    {
-                        return int.Parse(numbers);
-                    }
-                }
+                int[] nums = FormatAndParse(numbers);
+                return nums.Sum();
             }
         }
-
         public int[] FormatAndParse(string numbers)
         {
             StringBuilder delimiter= new StringBuilder();
@@ -62,7 +40,14 @@ namespace StringCalculaterExercise
             }
             numbers = numbers.Replace("\n", delimiter.ToString());
             int[] numbersArray = Array.ConvertAll(numbers.Trim().Split(delimiter.ToString()), int.Parse);
-            return numbersArray;
+            foreach (int num in numbersArray)
+            {
+                if (num < 0)
+                {
+                    throw new ArgumentException($"negatives not allowed : {num}");
+                }
+            }
+            return numbersArray.Where(x=> x < 1000).ToArray();
         }
 
     }
