@@ -27,7 +27,7 @@ namespace StringCalculaterTests
         }
         [Theory]
         [InlineData("-1,5")] // negative number with default delimiter
-        [InlineData("//;\n1;2;3;-4;5;6")] // negative number with specific delimiter
+        [InlineData("//;;\n1;;2;;3;;-4;;5;;6")] // negative number with specific delimiter
         [InlineData("//;\n1;2;3;-4;5\n6")] // negative number with specific delimiter and new lines between numbers
         public void AddShouldThrowException(string numbers)
         {
@@ -38,7 +38,7 @@ namespace StringCalculaterTests
         }
         [Theory]
         [InlineData("1\n2,3,4", new int[] { 1, 2, 3, 4 })] // default delimiter with new lines between numbers 
-        [InlineData("//;\n1;2;3\n4;5;6", new int[] { 1, 2, 3, 4, 5, 6 })] // specifed delemiter with new lines between numbers
+        [InlineData("//;;\n1;;2;;3\n4;;5;;6", new int[] { 1, 2, 3, 4, 5, 6 })] // specifed delemiter with new lines between numbers
         [InlineData("//;\n1;2;3;4;5;6", new int[] { 1, 2, 3, 4, 5, 6 })] // specifed delemiter
         [InlineData("1,5,6", new int[] { 1, 5, 6 })] // default delimiter
         public void FormatAndParse_shouldReturn_ArrayOfIntegers(string numbers, int[] expected)
